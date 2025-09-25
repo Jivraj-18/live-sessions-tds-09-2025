@@ -1,0 +1,41 @@
+name: Cache Workflow for Markdown Repo
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cache-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Prime the cache with a dummy key (no actual dependencies)
+      - name: Prime the cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.dummy-cache
+          key: cache-ebab974-${{ runner.os }}
+          restore-keys: |
+            cache-ebab974-${{ runner.os }}-
+
+      # Step 3: Output Cache Hit/Miss (Dummy Step)
+      - name: Check cache hit/miss
+        run: |
+          if [[ -d ~/.dummy-cache ]]; then
+            echo "Cache hit!"
+          else
+            echo "Cache miss!"
+          fi
+
+      # Step 4: Do something else (like validate markdown, etc.)
+      - name: Validate markdown (optional)
+        run: |
+          echo "Markdown file exists!"
