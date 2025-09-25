@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Prime the cache with a dummy key (no actual dependencies)
+      # Step 2: Prime the cache with a key `cache-ebab974`
       - name: Cache dependencies (prime)
         uses: actions/cache@v4
         with:
@@ -26,8 +26,8 @@ jobs:
           restore-keys: |
             cache-ebab974-${{ runner.os }}-
 
-      # Step 3: Output Cache Hit/Miss
-      - name: Check cache hit/miss
+      # Step 3: Echo Cache Hit/Miss (This is the `prime-cache-ebab974` step)
+      - name: prime-cache-ebab974
         run: |
           if [[ -d ~/.dummy-cache ]]; then
             echo "Cache hit!"
