@@ -1,0 +1,11 @@
+{
+  "name": "ga3-c78d2c",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
+  "extensions": [
+    "astral-sh.uv",
+    "ms-python.python"
+  ],
+  "postCreateCommand": "uv pip install fastapi"
+}
